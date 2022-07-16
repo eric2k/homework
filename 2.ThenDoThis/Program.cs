@@ -71,13 +71,79 @@ namespace _2.Puzzle.Medium
 
         }
 
-        static IEnumerable<IEnumerable<string>> Output(IEnumerable<string> input)
+        static IEnumerable<IEnumerable<string>> Output(IEnumerable<string> input1)
         {
+            List<string> input = new List<string>();
+            foreach (string sNew in input1)
+            {
+                if ((sNew + "") != "")
+                    input.Add(sNew.Trim());
+            };
+            input.Sort();
+
             var output = new List<List<string>>();
 
-            // YOUR CODE GOES HERE
+            foreach (string sNew in input)
+            {
+                bool bFound = false;
 
+                foreach (List<string> oList in output)
+                {
+                    if (AnagramsCompare(sNew, oList[0]))
+                    {
+                        bFound = true;
+
+                        bool bSame = false;
+
+                        foreach (string sOriginal in oList)
+                        {
+                            if (sOriginal == sNew)
+                            {
+                                bSame = true;
+                                break;
+                            }
+                        }
+
+                        if (!bSame) oList.Add(sNew);
+
+                        break;
+                    }
+                }
+                if (!bFound)
+                {
+                    var aa = new List<string>();
+                    aa.Add(sNew);
+                    output.Add(aa);
+                }
+            }
             return output;
+        }
+
+        private static bool AnagramsCompare(string firstString, string secondString)
+        {
+            if (secondString == null)
+            {
+                return false;
+            }
+            if (firstString.Length != secondString.Length)
+            {
+                return false;
+            }
+            //Convert string to character array  
+            char[] firstCharsArray = firstString.ToLower().ToCharArray();
+            char[] secondCharsArray = secondString.ToLower().ToCharArray();
+            //Sort array  
+            Array.Sort(firstCharsArray);
+            Array.Sort(secondCharsArray);
+            //Check each character and position.  
+            for (int i = 0; i < firstCharsArray.Length; i++)
+            {
+                if (firstCharsArray[i].ToString() != secondCharsArray[i].ToString())
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

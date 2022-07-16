@@ -30,7 +30,30 @@ namespace _1.WarmUp.Easy
 
             // YOUR CODE GOES HERE :)
 
+            int t3 = 0;
+            int t5 = 0;
+            for (int i = 1; i <= 100; i++)
+            {
+                t3 = i % 3;
+                t5 = i % 5;
 
+                if (t3 == 0 && t5 == 0)
+                {
+                    Console.Write("Sockeye Consulting\r\n");
+                }
+                else if (t3 == 0)
+                {
+                    Console.Write("Sockeye\r\n");
+                }
+                else if (t5 == 0)
+                {
+                    Console.Write("Consulting\r\n");
+                }
+                else
+                {
+                    Console.Write(i.ToString() + "\r\n");
+                }
+            }
 
             Console.WriteLine("\r\n\r\nCompleted -- Press any key to quit");
 
